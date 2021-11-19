@@ -1,0 +1,123 @@
+<InterfaceView asn1file="freertos-example.asn">
+<Function name="Incrementer" is_type="NO" language="C" default_implementation="default">
+    <Property name="Taste::coordinates" value="98300 89400 139200 110000"/>
+<Provided_Interface name="Increment" kind="Protected">
+    <Input_Parameter name="IncrementArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="117100 89400"/>
+</Provided_Interface>
+
+<Required_Interface name="Result" kind="Unprotected">
+    <Input_Parameter name="ResultArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="105100 89400"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Function name="Fizzer" is_type="NO" language="C" default_implementation="default">
+    <Property name="Taste::coordinates" value="55000 61200 81400 77000"/>
+<Provided_Interface name="PleaseFizzBuzz" kind="Sporadic" miat="0" queue_size="1" priority="1" stack_size="50">
+    <Property name="Taste::coordinates" value="71200 61200"/>
+</Provided_Interface>
+
+<Provided_Interface name="Buzzing" kind="Protected">
+    <Input_Parameter name="BuzzArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="81400 73700"/>
+</Provided_Interface>
+
+<Required_Interface name="Fizzing" kind="Sporadic" miat="0" queue_size="1" stack_size="50" priority="1">
+    <Input_Parameter name="FizzArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="81400 64100"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="false"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Function name="Buzzer" is_type="NO" language="C" default_implementation="default">
+    <Property name="Taste::coordinates" value="97300 60800 123700 76600"/>
+<Provided_Interface name="Fizzing" kind="Sporadic" miat="0" queue_size="1" stack_size="50" priority="1">
+    <Input_Parameter name="FizzArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="97300 64200"/>
+</Provided_Interface>
+
+<Provided_Interface name="Result" kind="Unprotected">
+    <Input_Parameter name="ResultArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="105200 76600"/>
+</Provided_Interface>
+
+<Required_Interface name="Increment" kind="Protected">
+    <Input_Parameter name="IncrementArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="116900 76600"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface name="Buzzing" kind="Protected">
+    <Input_Parameter name="BuzzArg" type="MyInteger" encoding="ACN"/>
+    <Property name="Taste::coordinates" value="97300 73700"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="false"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Function name="Clock" is_type="NO" language="C" default_implementation="default">
+    <Property name="Taste::coordinates" value="51500 29900 89100 47500"/>
+    <Property name="Taste::RootCoordinates" value="-94400 -60800 94500 60800"/>
+<Provided_Interface name="ClkInterface" kind="Cyclic" period="1000" dispatch_offset="0">
+    <Property name="Taste::coordinates" value="72300 29900"/>
+</Provided_Interface>
+
+<Required_Interface name="PleaseFizzBuzz" kind="Sporadic" miat="0" queue_size="1" priority="1" stack_size="50">
+    <Property name="Taste::coordinates" value="71100 47500"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="false"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Connection >
+    <Source func_name="Buzzer" ri_name="Buzzing"/>
+    <Target func_name="Fizzer" pi_name="Buzzing"/>
+    <Property name="Taste::coordinates" value="96700 73700 81700 73700"/>
+</Connection>
+
+<Connection >
+    <Source func_name="Incrementer" ri_name="Result"/>
+    <Target func_name="Buzzer" pi_name="Result"/>
+    <Property name="Taste::coordinates" value="105100 88800 105100 82900 105200 76900"/>
+</Connection>
+
+<Connection >
+    <Source func_name="Clock" ri_name="PleaseFizzBuzz"/>
+    <Target func_name="Fizzer" pi_name="PleaseFizzBuzz"/>
+    <Property name="Taste::coordinates" value="71100 48100 71200 60900"/>
+</Connection>
+
+<Connection >
+    <Source func_name="Fizzer" ri_name="Fizzing"/>
+    <Target func_name="Buzzer" pi_name="Fizzing"/>
+    <Property name="Taste::coordinates" value="82000 64100 97000 64200"/>
+</Connection>
+
+<Connection >
+    <Source func_name="Buzzer" ri_name="Increment"/>
+    <Target func_name="Incrementer" pi_name="Increment"/>
+    <Property name="Taste::coordinates" value="116900 77200 116900 83100 117100 89100"/>
+</Connection>
+
+</InterfaceView>
