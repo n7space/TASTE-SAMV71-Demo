@@ -1,0 +1,12 @@
+<DeploymentView>
+    <Node name="SAM_V71_1" type="ocarina_processors_arm::samv71.freertos" node_label="Node_1" namespace="ocarina_processors_arm">
+        <Property name="Taste::coordinates" value="107500 71800 136300 100000"/>
+        <Partition name="Partition_1">
+            <Property name="Taste::coordinates" value="112100 76600 133700 97600"/>
+            <Function name="Clock"/>
+            <Function name="Fizzer"/>
+            <Function name="Buzzer"/>
+            <Function name="Incrementer"/>
+        </Partition>
+    </Node>
+</DeploymentView>
